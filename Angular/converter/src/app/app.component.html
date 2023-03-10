@@ -1,0 +1,33 @@
+<img class="logo" src="https://yardim.com.br/icons/Icon-192.png" />
+<div class="titulo">Insira o JSON que gostaria de converter em CSV.</div>
+<div class="conteudo">
+  <div>
+    <textarea
+      (keyup)="verifyJson($event)"
+      [(ngModel)]="json"
+      rows="25"
+      cols="50"
+    >
+    </textarea>
+  </div>
+  <div *ngIf="shouldShowActionButtons()" class="botoes">
+    <button class="acao" (click)="converterJsonToCsv()">Converter</button>
+    <button class="acao" (click)="clear()">Limpar</button>
+    <button *ngIf="hasConvertedCsv()" class="acao" (click)="downloadCsv()">
+      Baixar
+    </button>
+  </div>
+  <div *ngIf="hasConvertedCsv()">
+    <textarea [(ngModel)]="csv" rows="25" cols="50" readonly> </textarea>
+  </div>
+</div>
+
+<div class="alert-dialog">
+  <div *ngIf="!shouldShowActionButtons()" class="insira-valor">
+    Para ter acesso ao conversor, insira um JSON no quadro branco.
+  </div>
+
+  <div *ngIf="hasMsgError()" class="valor-invalido">
+    {{ msgError }}
+  </div>
+</div>
